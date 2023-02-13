@@ -14,6 +14,7 @@
  */
  :root{
   --area-margin-left:10 em;
+  --image-height:55%
  }
  
  /************************HEADERS/FOOTERS/MAIN*****************************/
@@ -152,7 +153,7 @@ button{
   grid-column: 1/ span 6;
   grid-row: 8 / span 13;
   height: 500px;
-  
+  column-gap: 5%;
 }
 /*********************************END OF MAIN BODY SPECIFIC ITEMS**************************************/
 /******************************************************************************************************/
@@ -368,9 +369,108 @@ button{
 /****************************************END OF BANK SECTION*******************************************/
 /******************************************************************************************************/
 /*************************************LAPTOP INFORMATION AREA******************************************/
+.laptop-information-area{
+  /* align-items: baseline; */
+  align-items:flex-start;
+}
+.laptop-information-area .laptop-information-area-item {
+  grid-row: 2;
+  display: flex;
+  
+  
+  
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 10%;
+  
+  
+}
+.laptop-information-area-item.image{
+  
+  align-self: center;
+}
 
+.laptop-information-area-item img{
+  height: var(--image-height);
+  width: calc(var(--image-height)*1.77777778);
+}
 
+.laptop-information-area-item.model-info{
+  display: flex;
+  
+  flex-direction: column;
+  
+  
+  width: 100%;
+  
+  height: 100%;
+}
 
+.laptop-information-area-item.model-info.model{
+  
+  
+  
+}
+.laptop-information-area-item.model-info.info{
+  
+}
+
+.laptop-information-area-item.price-info{
+  display: flex;
+  flex-direction: column;
+  
+  width: 80%;
+  /* align-content: center; */
+  
+  height: 100%;
+  
+  
+}
+.laptop-information-area-item.price-info.price{
+
+}
+
+.laptop-information-area-item.price-info.price h1{
+ 
+}
+
+.laptop-information-area-item.price-info.button{
+  
+  
+  height: 100%;
+}
+
+ .laptop-information-area-item.price-info.button button{
+  width: 100%;
+  height: 50%;
+  background-color: rgb(75, 201, 240);
+  font-size: large;
+  font-weight: bold;
+}
+/* .laptop-information-area{
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  
+}
+.laptop-information-area .image{
+ grid-column: 1;
+ grid-row: 2 / span 2;
+ 
+}
+.laptop-information-area .model-info{
+  grid-column: 2;
+  grid-row: 2 /span 2;
+}
+.laptop-information-area img{
+  height: var(--image-height);
+  width: calc(var(--image-height)*1.77777778);
+}
+.laptop-information-area .price-info{
+  grid-column:3 ;
+  grid-row: 2 /span 2;
+} */
 /**********************************END OF LAPTOP INFORMATION AREA*************************************/
 /*****************************************************************************************************/
 /******************************************MISCELLANEOUS**********************************************/

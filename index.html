@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="compStore.css">
-    <script src="compStoreScript.js" defer></script>
+    <script src="scripts/compStoreIndex.js" defer type="module"></script>
+    <script src="scripts/test.js" defer type="module"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -30,11 +31,11 @@
         </header>
             <main>
                 <div class="grid-container">
-                    <div class="area-item bank-section">
+                    <div class="area-item bank-section" id="bank-section">
                         <div class="inner-area-item item1">
                             <h3>Joe Banker</h3>
                         </div>
-                        <div class="inner-area-item bank-section item2">
+                        <div class="inner-area-item bank-section item2" id="balance-display">
                             <div id="balance-text">
                                 <p>Balance</p>
                             </div>
@@ -42,9 +43,9 @@
                                 <p>200 Euro</p>
                             </div>
                         </div>
-                        <div class="inner-area-item item3">
-                            <div class="button-loan">
-                                <button class="buttons" id="loan">Get a loan</button>
+                        <div class="inner-area-item item3" id="bank-loan-button">
+                            <div class="button-loan" id="bank-button-get-loan">
+                                <button class="buttons" id="get-loan">Get a loan</button>
                             </div>
                         </div>
                     </div>

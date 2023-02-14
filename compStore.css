@@ -18,14 +18,20 @@
  }
  
  /************************HEADERS/FOOTERS/MAIN*****************************/
+ body{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+ }
  .wrapper{
     min-width: 873px;
+    max-width: 1920px;
     box-sizing: border-box;
     
     width: 80%;
     display: flex;
     flex-direction: column;
-    align-self: center;
+    
     justify-content: center;
  }
  header,footer{
@@ -356,7 +362,7 @@ button{
     width: 80%;
 }
 
-#loan{    
+#get-loan{    
   justify-content: center;
   font-size: x-large;
   bottom: 0;

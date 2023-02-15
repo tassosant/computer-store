@@ -1,6 +1,6 @@
 export class MyBalances{
     constructor(){
-        this._bankBalance = 100;
+        this._bankBalance = 0;
         this._loanBalance = 0;
         this._payBalance = 0;
     }
@@ -22,7 +22,7 @@ export class MyBalances{
     set payBalance(balance){
         this._payBalance=balance;
     }
-    display() {
-        console.log("loanBalance is"+this.bankBalance);
-    }
+    // display() {
+    //     console.log("loanBalance is"+this.bankBalance);
+    // }
 }

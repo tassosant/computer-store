@@ -1,4 +1,5 @@
-[
+export function dataResponseSimulator(){
+const data=[
     {
       "id": 1,
       "title": "Classic Notebook",
@@ -43,7 +44,7 @@
         "1Ghz Dual Core Celaroon",
         "4GB Ram",
         "128GB Hard Disk",
-        "Multi touch trackpage with buttons",
+        "Multi touch trackpage w}ith buttons",
         "Mono Speakers",
         "Comes with free bag"
       ],
@@ -108,3 +109,5 @@
       "image": "assets/images/6.jpg"
     }
   ]
+  return data;
+}

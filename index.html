@@ -32,10 +32,10 @@
             <main>
                 <div class="grid-container">
                     <div class="area-item bank-section" id="bank-section">
-                        <div class="inner-area-item item1">
+                        <div class="bank-section inner-area-item item1">
                             <h3>Joe Banker</h3>
                         </div>
-                        <div class="inner-area-item bank-section item2" id="balance-display">
+                        <div class="bank-section inner-area-item item2" id="balance-display">
                             <div id="balance-text">
                                 <p>Balance</p>
                             </div>
@@ -43,18 +43,26 @@
                                 <p>200 Euro</p>
                             </div>
                         </div>
-                        <div class="inner-area-item item3" id="bank-loan-button">
+                        <!-- <div class="bank-section inner-area-item loan-balance-item" id="loan-balance-display">
+                            <div id="loan-balance-text">
+                                <p>Balance</p>
+                            </div>
+                            <div id="loan-balance-amount">
+                                <p>200 Euro</p>
+                            </div>
+                        </div> -->
+                        <div class="bank-section inner-area-item  item3" id="bank-loan-button">
                             <div class="button-loan" id="bank-button-get-loan">
                                 <button class="buttons" id="get-loan">Get a loan</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="area-item work-section">
-                        <div class="inner-area-item item1">
+                    <div class="area-item work-section" id="work-section">
+                        <div class="work-section inner-area-item item1">
                             <h3>Work</h3>
                         </div>
-                        <div class="inner-area-item work-section item2">
+                        <div class="work-section inner-area-item item2" id="work-section-item2">
                             <div id="pay-text">
                                 <p>Pay</p>
                             </div>
@@ -62,7 +70,10 @@
                                 <p>200 Euro</p>
                             </div>
                         </div>
-                        <div class="inner-area-item item3">
+                        <!-- <div class="work-section inner-area-item repay-loan">
+                            <button class="buttons" id="repay-loan-button">Repay Loan</button>
+                        </div> -->
+                        <div class="work-section inner-area-item item3">
                             <div class="button-bank">
                                 <button class="buttons" id="bank">Bank</button>
                             </div>
@@ -98,7 +109,7 @@
                                                 <th>Features:</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="laptop-description">
                                             <tr><td>Spec1111111111111111111111111111111111111111</td></tr>
                                             <tr><td>Spec2</td></tr>
                                             <tr><td>Spec3</td></tr>
@@ -113,18 +124,18 @@
                     </div>
                     <div class="area-item laptop-information-area">
                     <div class="laptop-information-area-item image">
-                        <img src="Images/laptop 1.jpg" alt="pc out of windows">
+                        <img src="Images/laptop 1.jpg" alt="pc out of windows" id="">
                     </div>
                     <div class="laptop-information-area-item model-info">
-                        <div class="laptop-information-area-item model-info model">
+                        <div class="laptop-information-area-item model-info model" id="laptop-title">
                             <h1>Intol Celeroon E10</h1>
                         </div>
-                        <div class="  laptop-information-area-item model-info info">
+                        <div class="  laptop-information-area-item model-info info" id="laptop-specs">
                             <p>This laptop will turn on! It is perfect for a developer who likes to debugging!</p>
                         </div>
                     </div>
                     <div class="laptop-information-area-item price-info">
-                        <div class="  laptop-information-area-item price-info price">
+                        <div class="laptop-information-area-item price-info price" id="laptop-price">
                             <h1>1500 EURO</h1>
                         </div>
                         <div class=" laptop-information-area-item price-info button">

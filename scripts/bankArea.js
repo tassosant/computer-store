@@ -1,4 +1,5 @@
 import { renderLoanBalance, renderRepayButton,currencyDisplay } from "./renders.js"; 
+import { WorkSection } from "./workSection.js";
 export function isNumber(requestedLoanAmount){
     
     let pattern = new RegExp('[^0-9]','g');
@@ -74,6 +75,7 @@ export function BankArea(myBalances)  {
                     msg = `Loan amount of ${requestedLoanAmount} has been accepted`;
                     console.log(msg);
                     renderRepayButton();
+
                     myBalances.loanBalance = Number(requestedLoanAmount);
                     renderLoanBalance(myBalances.loanBalance);
                 }

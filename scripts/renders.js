@@ -1,3 +1,5 @@
+//import { WorkSection} from "./workSection.js";
+import { repayloanAfterClick } from "./compStoreIndex.js";
 export function renderRepayButton() {
     
      const getWorkSection = document.getElementById('work-section');
@@ -6,8 +8,14 @@ export function renderRepayButton() {
      const buttonText = document.createTextNode('Repay loan');
      buttonElement.appendChild(buttonText);
      divElement.appendChild(buttonElement);
-     getWorkSection.appendChild(divElement);      
+     getWorkSection.appendChild(divElement); 
+     const getRepayLoanButton = document.getElementById('repay-loan-button');
+     buttonElement.addEventListener('click',()=>{repayloanAfterClick();});
+    
 }
+// export function getRepayLoanButton(){
+//     return getRepayLoanButton;
+// }
 
 export function renderLoanBalance(val){
     if(document.getElementById('loan-balance-display')!=undefined){
@@ -98,7 +106,8 @@ export function renderLaptopPrice(price){
 }
 
 
-export function renderSelectLaptops(laptops=[]){
+
+export function renderSelectLaptops(laptops){
     
     const dropDownList = document.getElementById('laptops');
     const descriptionPrepare = document.getElementById('laptop-description');
@@ -116,7 +125,7 @@ export function renderSelectLaptops(laptops=[]){
 
 }
 
-export function renderSelectedLaptop(laptop){
+export function renderSelectedSpecs(laptop){
     let specs = laptop.specs;
     const selectedLaptopTitle = document.getElementById('laptop-title').firstElementChild;
     selectedLaptopTitle.innerHTML="";
@@ -138,12 +147,44 @@ export function selectLaptopsHandler(getLaptopId,laptops=[]){
     
     //const getLaptopId = document.getElementById('laptops').value;
     console.log(getLaptopId);
-    for(let index = 0; index< laptops.length;index++){
-        if(laptops[index].id==getLaptopId){
-            renderSelectedLaptop(laptops[index]);
-            break;
-        }
-    }   
+    //for(let index = 0; index< laptops.length;index++){
+        // if(laptops[index].id==getLaptopId){
+        //     renderLaptopDesc(laptops[index].description);
+        //     renderSelectedSpecs(laptops[index]);
+        //     renderLaptopPrice(laptops[index])
+            //break;
+        //}
+    //}
+    let laptop = laptops.filter((laptop,index,laptops)=>{
+        return laptops[index].id==getLaptopId?laptops[index]:0;
+    })
+    console.log(laptop[0]);
+    renderLaptopDesc(laptop[0].description);
+    renderSelectedSpecs(laptop[0]);
+    renderLaptopPrice(laptop[0].price);
+    renderLaptopImage(laptop[0]);
+    
 
 }
 
+export function renderLaptopDesc(description){
+    const descriptionPrepare = document.getElementById('laptop-description');
+    descriptionPrepare.replaceChildren();
+    const descriptionPrepareRow = createAnElement('tr','','');
+    const descriptionPrepareCol = createAnElement('td','','');
+    const descrText = document.createTextNode(description);
+    descriptionPrepareCol.appendChild(descrText);
+    descriptionPrepareRow.appendChild(descriptionPrepareCol);
+    descriptionPrepare.appendChild(descriptionPrepareRow);
+}
+
+export function renderLaptopImage(laptop){
+    const getLaptopImageDiv = document.getElementById("laptop-image");
+    
+    
+    getLaptopImageDiv.replaceChildren();
+    const createLaptopImage = createAnElement('img','','');
+    createLaptopImage.src = laptop.image;
+    createLaptopImage.alt=laptop.title;
+    getLaptopImageDiv.appendChild(createLaptopImage);
+}

@@ -4,11 +4,25 @@ export function WorkSection(myBalances){
     
 
     //common lines to handle when pressing bank or repay loan button
-    function renderAllBalances(){
-        console.log("naiiiiiiiiiiiiii");
+    function renderAllBalances(repayButtonPressed){
+        
 
 
-
+        const balances={
+            BankBalance:myBalances.bankBalance,
+            LoanBalance:myBalances.loanBalance,
+            PayBalance:myBalances.payBalance
+        }
+        let bankbalance= balances.BankBalance;
+        let loanbalance= balances.LoanBalance;
+        let paybalance = balances.PayBalance;
+        const transferBalancies = workBalanceHandler(bankbalance,loanbalance,paybalance,repayButtonPressed);
+        myBalances.bankBalance = transferBalancies.BankBalance;
+        myBalances.loanBalance = transferBalancies.LoanBalance;
+        myBalances.payBalance = transferBalancies.PayBalance;
+        renderLoanBalance(myBalances.loanBalance);
+        renderBankBalance(myBalances.bankBalance);
+        renderPayBalance(myBalances.payBalance);
 
 
 
@@ -26,23 +40,8 @@ export function WorkSection(myBalances){
         if(myBalances.loanBalance>0){
             renderLoanBalance(myBalances.loanBalance);
         }
-        renderAllBalances();
-        const balances={
-            BankBalance:myBalances.bankBalance,
-            LoanBalance:myBalances.loanBalance,
-            PayBalance:myBalances.payBalance
-        }
-        let bankbalance= balances.BankBalance;
-        let loanbalance= balances.LoanBalance;
-        let paybalance = balances.PayBalance;
-        const transferBalancies = workBalanceHandler(bankbalance,loanbalance,paybalance,false);
-        myBalances.bankBalance = transferBalancies.BankBalance;
-        myBalances.loanBalance = transferBalancies.LoanBalance;
-        myBalances.payBalance = transferBalancies.PayBalance;
-        //if bank button is pressed then loan balance is appeared
-        renderLoanBalance(myBalances.loanBalance);
-        renderBankBalance(myBalances.bankBalance);
-        renderPayBalance(myBalances.payBalance);
+        renderAllBalances(false);
+        
     }
     //run this function if the repay loan button is pressed
     this.pressRepayLoan = function pressRepayLoan(){
@@ -50,21 +49,8 @@ export function WorkSection(myBalances){
             console.log("You have not a loan to repay");
             return;
         }
-        const balances={
-            BankBalance:myBalances.bankBalance,
-            LoanBalance:myBalances.loanBalance,
-            PayBalance:myBalances.payBalance
-        }
-        let bankbalance= balances.BankBalance;
-        let loanbalance= balances.LoanBalance;
-        let paybalance = balances.PayBalance;
-        const transferBalancies = workBalanceHandler(bankbalance,loanbalance,paybalance,true);
-        myBalances.bankBalance = transferBalancies.BankBalance;
-        myBalances.loanBalance = transferBalancies.LoanBalance;
-        myBalances.payBalance = transferBalancies.PayBalance;
-        renderLoanBalance(myBalances.loanBalance);
-        renderBankBalance(myBalances.bankBalance);
-        renderPayBalance(myBalances.payBalance);
+        renderAllBalances(true);
+        
     }
 }
 

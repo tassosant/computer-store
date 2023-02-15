@@ -109,5 +109,7 @@ const data=[
       "image": "assets/images/6.jpg"
     }
   ]
+  
   return data;
+  
 }

@@ -4,7 +4,7 @@ export function WorkSection(myBalances){
     
 
     //common lines to handle when pressing bank or repay loan button
-    function renderAllBalances(repayButtonPressed){
+    function renderAllBalances(repayButtonPressed,renderLoan){
         
 
         //creating a dictionary of balances
@@ -16,13 +16,16 @@ export function WorkSection(myBalances){
         let bankbalance= balances.BankBalance;
         let loanbalance= balances.LoanBalance;
         let paybalance = balances.PayBalance;
+        if(loanbalance==0)
+            renderLoan=false;
         //assign balance to function workBalanceHandler
         const transferBalancies = workBalanceHandler(bankbalance,loanbalance,paybalance,repayButtonPressed);
         myBalances.bankBalance = transferBalancies.BankBalance;
         myBalances.loanBalance = transferBalancies.LoanBalance;
         myBalances.payBalance = transferBalancies.PayBalance;
         //render balances
-        renderLoanBalance(myBalances.loanBalance);
+        if(renderLoan!=false)
+            renderLoanBalance(myBalances.loanBalance);
         renderBankBalance(myBalances.bankBalance);
         renderPayBalance(myBalances.payBalance);
 
@@ -40,11 +43,12 @@ export function WorkSection(myBalances){
     //run this function if the bank button is pressed
     this.pressBank=function pressBank(){
         //console.log("bank pressed");
+        
         if(myBalances.loanBalance>0){
             renderLoanBalance(myBalances.loanBalance);
         }
-        
-        renderAllBalances(false);
+        //repay button not pressed //loan button not displayed
+        renderAllBalances(false,true);
         
     }
     //run this function if the repay loan button is pressed
@@ -58,8 +62,8 @@ export function WorkSection(myBalances){
             alert(msg);
             return;
         }
-
-        renderAllBalances(true);
+        //repay button pressed
+        renderAllBalances(true,true);
         
     }
 }

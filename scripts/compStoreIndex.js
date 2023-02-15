@@ -12,7 +12,7 @@ import {
 import { workBalanceHandler,salaryIncrease,WorkSection } from "./workSection.js";
 import { BankArea } from "./bankArea.js";
 // import { HelperClass } from "./helperClass.js";
-import { requestData,destructureData,fetchJSON } from "./requests.js";
+import { requestData,destructureData } from "./requests.js";
 import {dataResponseSimulator} from "./computerStoreData.js";
 
 
@@ -21,12 +21,13 @@ requestData();
 
 
 
-
+//initialize the first constants
 const myBalances= new MyBalances();
 const workSection = new WorkSection(myBalances);
 const bankArea =new BankArea(myBalances);
 const renderWorkAndBankSection =new RenderBalances();
 
+//this function is ot use it as a module in renders.js file
 export function repayloanAfterClick(){
   workSection.pressRepayLoan();
 }
@@ -36,49 +37,55 @@ let computerStoreData = data;
 computerStoreData = destructureData(computerStoreData,baseURL); 
 renderWorkAndBankSection.updateSalary(0);
 renderWorkAndBankSection.updateBank(0);
-selectLaptopsHandler(1,computerStoreData);
 renderLaptopDesc(computerStoreData[0].description);
 // const computerStoreData=requestData();
 // console.log(computerStoreData);
 renderSelectLaptops(computerStoreData);
+selectLaptopsHandler(1,computerStoreData);
 
 
 const getLoanButton = document.getElementById("get-loan");
-const getWorkButton = document.getElementById('work');    
-const getBankButton = document.getElementById('bank');
-const getLaptopOptions = document.getElementById('laptops') ;
-const getBuyButton = document.getElementById("buy-button");
 getLoanButton.addEventListener('click',()=> {
+  //callback the function pressLoan to check if there is another loan, to veify the loan etc
   bankArea.pressloan();
-  // if(getRepayLoanButton()==undefined){
-  //   //getRepayLoanButton().onclick=workSection.pressRepayLoan();
-  //   getRepayLoanButton().addEventListener('click',()=>{
-  //   workSection.pressRepayLoan();console.log("Repay loan clicked");
-  });
-    // let clickEvent = new Event('click');
-    // repayloanbtn.dispatchEvent(clickEvent);
   
+});
 
 
+
+//get the buttons of the work section and wait for click them  
+const getWorkButton = document.getElementById('work');    
 getWorkButton.addEventListener('click',workSection.pressWork);
+const getBankButton = document.getElementById('bank');
 getBankButton.addEventListener('click', workSection.pressBank);
-getLaptopOptions.addEventListener("change",()=>{ 
-  selectLaptopsHandler(document.getElementById('laptops').value,computerStoreData)}
-  );
 
+//add an evernt listener to the dropdown list so to display the selected laptop's info
+const getLaptopOptions = document.getElementById('laptops') ;
+getLaptopOptions.addEventListener("change",()=>{ 
+      //callback the selectLaptopsHandler function to render the proper values
+     selectLaptopsHandler(document.getElementById('laptops').value,computerStoreData)}
+      );
+
+      
+//handles the buy button      
+const getBuyButton = document.getElementById("buy-button");
 getBuyButton.addEventListener("click",()=>{
   const getLaptopId = document.getElementById("laptops").value;
+  
+  //extract the selected laptop
   let laptop = computerStoreData.filter((laptop,index,laptops)=>{
     //returns the element of the data that matches the laptopId
     return laptops[index].id==getLaptopId?laptops[index]:0;
   });
+  
   //we write [0] because the returned value from above is an array of one element
   if(laptop[0].price>myBalances.bankBalance){
-    console.log("You cannot buy this laptop");
+    alert("You cannot buy this laptop");
   }else{
+    //handles bank balance
     myBalances.bankBalance = myBalances.bankBalance - laptop[0].price;
     renderBankBalance(myBalances.bankBalance);
-    console.log("The laptop is yours");
+    alert("The laptop is yours");
   }
 
 });

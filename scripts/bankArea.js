@@ -1,16 +1,20 @@
 import { renderLoanBalance, renderRepayButton,currencyDisplay } from "./renders.js"; 
 import { WorkSection } from "./workSection.js";
+
+
 export function isNumber(requestedLoanAmount){
-    
+    //
+    //let pattern = new RegExp('^([0-9]+).([\.]).([0-9]+)$');
     let pattern = new RegExp('[^0-9]','g');
     let result = requestedLoanAmount.match(pattern);
 
+    //if it matches only numbers, the regex is to match any string so if it does not find non numeric values it is a number, so the result will be null
     if(result==undefined){
-        console.log("number");
+        // console.log("number");
         return true;
     }
     else{
-        console.log("string");
+        // console.log("string");
         return false;
     }
     
@@ -18,63 +22,31 @@ export function isNumber(requestedLoanAmount){
 
 
 export function BankArea(myBalances)  {
-    // constructor(){
-    //     this.num;
-    //     this.loan = 0;
-    //     this.balance = 0;
-    // }
-             
     
-    
-    // validateLoan=(num)=>{
-        
-    //     let loan = this.loan;
-    //     if(loan>num){
-    //         console.log("nope");
-    //     }else{
-    //         console.log("ok");
-    //     }
-        
-    // }
-    // pressLoan=()=>{
-    
-    //     let message = "Type a number";
-    //     let errorMessage = "Invalid input, type a number";
-    //     function popup(message){
-    //         const aNumber = Number (window.prompt(message, ""));
-    //         return aNumber;
-    //     }
-    //     let num = popup(message);
-        
-    //     //while(! (validateType(num,VarType.number))){
-    //         while(typeof num!='number'){
-    //         console.log("mpika");
-    //         num = popup(errorMessage);
-    //     }
-    //     this.validateLoan(this.num);
-    // }
     
     function validateLoan(requestedLoanAmount){
         
         let loan = myBalances.loanBalance;
         let msg="";
         let bankbalance = myBalances.bankBalance;
-        console.log("current loan is:"+loan);
+        //console.log("current loan is:"+loan);
         if(loan>0){
-            msg = `You cannot get a loan of ${requestedLoanAmount} because you have another loan unpaid`;
-            console.log(msg);
+            msg = `You cannot get a loan of ${currencyDisplay().format(requestedLoanAmount)} because you have another loan unpaid`;
+            alert(msg);
             return;
         }else{
             
                 if(2*bankbalance<Number(requestedLoanAmount)){
-                    msg = `You cannot get a loan of ${requestedLoanAmount} because you have low balance`;
-                    console.log(msg);
+                    msg = `You cannot get a loan of ${currencyDisplay().format(requestedLoanAmount)} because you have low balance`;
+                    alert(msg);
                     return;
                 }
                 else{
                     msg = `Loan amount of ${requestedLoanAmount} has been accepted`;
-                    console.log(msg);
+                    alert(msg);
+                    //create the reapy loan button and add an evenet listener
                     renderRepayButton();
+                    //we convert it to numebr because the input value is string
 
                     myBalances.loanBalance = Number(requestedLoanAmount);
                     renderLoanBalance(myBalances.loanBalance);
@@ -84,11 +56,9 @@ export function BankArea(myBalances)  {
         
         
     }
-    
+    //if get a loan pressed call this function
     this.pressloan = function pressLoan(){
-    
-        let message = "Type a number";
-        let errorMessage = "Invalid input, type a number";
+        //function for input value from user, returns a string
         function popup(message){
             //needs validating
             const aNumber = window.prompt(message, "");
@@ -99,26 +69,27 @@ export function BankArea(myBalances)  {
             
             return aNumber;
         }
+        let message = "Type a number";
+        let errorMessage = "Invalid input, type a number";
+        //execute the function assigned to this variable as an expression
         let requestedLoanAmount = popup(message);
         
-        //     while(typeof num!='number'){
-        // while(! (validateType(num,VarType.number))){
-        //     console.log("mpika");
-        //     num = popup(errorMessage);
-        // }
+        //do nothing//alert the user that nothing typed
         if(requestedLoanAmount==0){
-            console.log("You typed nothing");
+            alert("You typed nothing");
             return;
         }
+        //if the input string is not a number do nothing, alert the user for invalid input
         if(!isNumber(requestedLoanAmount)){
-            console.log("Type a valid number");
+            alert("Type a valid number");
             return;
         }
+        // check if there is loan or the bank balance is smaller than loanbalance/2.
         validateLoan(requestedLoanAmount);
-        display("The requested loan amount is:",requestedLoanAmount);
+        //display("The requested loan amount is:",requestedLoanAmount);
     }
-    
+    //was helper function
     function display(msg,requestedLoanAmount){
-        console.log(msg+requestedLoanAmount);
+        alert(msg+requestedLoanAmount);
     }
 }

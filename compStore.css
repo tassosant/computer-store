@@ -140,8 +140,8 @@ button{
 }
 
 .area-item{
-    border-style: solid;
-    background-color: rgb(251, 251, 251);
+    /* border-style: solid; */
+    background-color: rgb(163, 196, 163);
     border-radius: 20px;
     grid-row: 1/ span 3;
     display: grid;

@@ -1,5 +1,7 @@
 //import { WorkSection} from "./workSection.js";
 import { repayloanAfterClick } from "./compStoreIndex.js";
+
+//create repay loan button and create an event listener
 export function renderRepayButton() {
     
      const getWorkSection = document.getElementById('work-section');
@@ -16,13 +18,14 @@ export function renderRepayButton() {
 // export function getRepayLoanButton(){
 //     return getRepayLoanButton;
 // }
-
+//display loan balance
 export function renderLoanBalance(val){
+    //if ther is banak balance as text update only its value, tehn return
     if(document.getElementById('loan-balance-display')!=undefined){
         const getLoanBalance = document.getElementById('loan-balance-amount').firstElementChild;
         getLoanBalance.innerHTML="";
         getLoanBalance.innerHTML=currencyDisplay().format(val);
-        console.log("mpika");
+        
         return;
     }
     
@@ -58,6 +61,7 @@ export function renderLoanBalance(val){
     banckSectionEl.appendChild(loanBalanceDivEl);
 }
 
+//creating a DOM element, this function is to avoid repeating myself
 export function createAnElement(elementName,id,className){
     const createdELement = document.createElement(elementName);
     if(id!=undefined)
@@ -68,7 +72,7 @@ export function createAnElement(elementName,id,className){
     return createdELement;   
 }
 
-
+//helper funciton to display the currency
 export function currencyDisplay(){
     const currency = new Intl.NumberFormat('en-US',{
         style:'currency',
@@ -77,6 +81,8 @@ export function currencyDisplay(){
     return currency;
 }
 
+
+//this function is to be used for the first time when DOM elements will be loaded to the DOM
 export function RenderBalances(){
     this.updateSalary = function updateSalary(val){
         renderPayBalance(val);
@@ -87,18 +93,19 @@ export function RenderBalances(){
     }
 }
 
+//dipslay bank balance
 export function renderBankBalance(bankBalance){
     const bankBalanceAmount = document.getElementById('balance-amount').firstElementChild;
     bankBalanceAmount.innerHTML="";
     bankBalanceAmount.innerHTML=currencyDisplay().format(bankBalance);
 }
-
+//dipslay loan balance
 export function renderPayBalance(payBalance){
     const salaryBalanceText = document.getElementById('pay-amount').firstElementChild;
     salaryBalanceText.innerHTML="";
     salaryBalanceText.innerHTML=currencyDisplay().format(payBalance);
 }
-
+//dipslay laptop price
 export function renderLaptopPrice(price){
     const laptopPriceInfoDivEl = document.getElementById('laptop-price').firstElementChild;
     laptopPriceInfoDivEl.innerHTML="";
@@ -106,7 +113,7 @@ export function renderLaptopPrice(price){
 }
 
 
-
+//render the laptops in dropdown menu
 export function renderSelectLaptops(laptops){
     
     const dropDownList = document.getElementById('laptops');
@@ -125,6 +132,7 @@ export function renderSelectLaptops(laptops){
 
 }
 
+//redner the specs int laptop information area
 export function renderSelectedSpecs(laptop){
     let specs = laptop.specs;
     const selectedLaptopTitle = document.getElementById('laptop-title').firstElementChild;
@@ -143,22 +151,16 @@ export function renderSelectedSpecs(laptop){
     laptopSpecs.appendChild(createUnorderedList);
 
 }
+
+//render the 
 export function selectLaptopsHandler(getLaptopId,laptops=[]){
     
-    //const getLaptopId = document.getElementById('laptops').value;
-    console.log(getLaptopId);
-    //for(let index = 0; index< laptops.length;index++){
-        // if(laptops[index].id==getLaptopId){
-        //     renderLaptopDesc(laptops[index].description);
-        //     renderSelectedSpecs(laptops[index]);
-        //     renderLaptopPrice(laptops[index])
-            //break;
-        //}
-    //}
+    //filters the responsed data from API and exrtacts the laptop with specicif ID
     let laptop = laptops.filter((laptop,index,laptops)=>{
         return laptops[index].id==getLaptopId?laptops[index]:0;
     })
-    console.log(laptop[0]);
+    
+    //render all laptop required info
     renderLaptopDesc(laptop[0].description);
     renderSelectedSpecs(laptop[0]);
     renderLaptopPrice(laptop[0].price);
@@ -167,6 +169,8 @@ export function selectLaptopsHandler(getLaptopId,laptops=[]){
 
 }
 
+
+//render laptop description
 export function renderLaptopDesc(description){
     const descriptionPrepare = document.getElementById('laptop-description');
     descriptionPrepare.replaceChildren();
@@ -178,6 +182,7 @@ export function renderLaptopDesc(description){
     descriptionPrepare.appendChild(descriptionPrepareRow);
 }
 
+//render laptop image
 export function renderLaptopImage(laptop){
     const getLaptopImageDiv = document.getElementById("laptop-image");
     

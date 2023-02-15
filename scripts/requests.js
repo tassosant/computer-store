@@ -3,6 +3,8 @@ import {dataResponseSimulator} from "./computerStoreData.js";
 import { renderSelectLaptops, selectLaptopsHandler } from "./renders.js";
 import {init} from "./compStoreIndex.js";
 
+
+//destructure the responsed data to the app's requirements
 export function destructureData(dataJSON=[], baseURL){
     if(dataJSON==undefined){
         //console.log("sorry bro");
@@ -11,7 +13,7 @@ export function destructureData(dataJSON=[], baseURL){
     let destructuredData = [];
     for(let index = 0 ; index < dataJSON.length;index++){
         destructuredData.push({
-            id:dataJSON[index].id,
+            id:dataJSON[index].id, //this is to handle for <select> DOM element , I pass each Id to the attribute value of <option>'s element
             title:dataJSON[index].title,
             description:dataJSON[index].description,
             specs:dataJSON[index].specs,
@@ -37,11 +39,13 @@ export function destructureData(dataJSON=[], baseURL){
     return destructuredData;
 }
 
+
+//request the data of API
 export function requestData(){
     const baseURL = "https://hickory-quilled-actress.glitch.me";
     let dataResponse=new Object();
     // dataResponse=fetchJSON(`${baseURL}/computers`,dataResponse,'jsonp');
-
+    //creating async function, waits for the response
     async function fetchComputerStoreData() {
         const response = await fetch(`${baseURL}/computers`);
         // waits until the request completes...
@@ -51,7 +55,7 @@ export function requestData(){
     }
     //dataResponse=fetchComputerStoreData();
     //sleep(3000);
-    
+    //when the promise returned we pass the JSON data to init() function which is in compStoreIndex.js file
     fetchComputerStoreData().then((computerStoreData)=>{
         init(computerStoreData,baseURL)});
      
@@ -66,24 +70,24 @@ export function requestData(){
     //  return dataResponse;
 }
 
-export function fetchJSON(path, success, error){
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                success =JSON.parse(xhr.responseText);
-                init(success);
-                }
-                else {
-                error(xhr);
-                }
-            }
-        };
-        xhr.open('GET', path, true);
-        xhr.send();
+// export function fetchJSON(path, success, error){
+//         var xhr = new XMLHttpRequest();
+//         xhr.onreadystatechange = function () {
+//             if (xhr.readyState === 4) {
+//                 if (xhr.status === 200) {
+//                 success =JSON.parse(xhr.responseText);
+//                 init(success);
+//                 }
+//                 else {
+//                 error(xhr);
+//                 }
+//             }
+//         };
+//         xhr.open('GET', path, true);
+//         xhr.send();
         
         
-    }
+//     }
 
 
     // function makeGetRequest(path) {

@@ -82,24 +82,34 @@ export function workBalanceHandler(bankBalance, loanBalance, payBalance, repayBu
         if(!repayButtonPressed){
             //reduce salary by 10% to transfer to bank
             payBalanceFixed=payBalance*0.1;
+            bankBalance = bankBalance + payBalance - payBalanceFixed;
+            loanBalance = loanBalance - payBalanceFixed;
+            //transfer remaining funds
+            if(loanBalance < 0){
+                bankBalance = bankBalance - loanBalance;
+                loanBalance =0;
+            }
+        }else{
+            //repay pressed
+            loanBalance = loanBalance - payBalanceFixed;
+            //transfer remaining funds
+            if(loanBalance < 0){
+                bankBalance = bankBalance -loanBalance;
+                loanBalance = 0;
+            }
         }
+        
         //we reduce the loan when bank button or repay button is pressed.It reduces as the assignment requires
         //because I update the paybalance depending the case
-        loanBalance = loanBalance-payBalanceFixed;
+        
         //if loanBalance is below zero, transfer the remaining funds to bank balance
-        if(loanBalance<0){
-            bankBalance = bankBalance-loanBalance;
-            //loan cannot be below to zero
-            loanBalance = 0;
-        }
-        else{
+        
             //if loan balance is not below zero try this:
             //here we pressed the bank button but there is loan or there is no loan, so the 10% of pay balance must be transferred to 
             //the bank balance in case the loan exists. In this line I check that if payBalance is greater than payBalanceFixed then the
             //bank button has been pressed, so the 10% is transferred to loan(bankBalance = bankBalance+0.9*paybalance). 
-            //If the repay button is pressed the payBalanceFixed is equal to paybalance, so it will be trans
-            bankBalance = bankBalance+(payBalanceFixed<payBalance?payBalance-payBalanceFixed:payBalanceFixed);
-        }
+            //If the repay button is pressed the payBalanceFixed is equal to paybalance, so it will be transferred the whole amount
+            
         //console.log("loan balance is:"+loanBalance);
 
         //if there is NO loan
@@ -112,6 +122,8 @@ export function workBalanceHandler(bankBalance, loanBalance, payBalance, repayBu
     }
     //we pressed either bank or loan button, so the pay balance reduced to 0
     payBalanceFixed = 0;
+    if(loanBalance<0)
+        loanBalance=0;
     const balances = {
         BankBalance:bankBalance,
         LoanBalance:loanBalance,

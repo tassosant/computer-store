@@ -456,7 +456,7 @@ button{
 .laptop-selection-area.features div table  {  border-collapse: collapse;   text-align: start;  table-layout: fixed;
   }
 /* th, td { padding: 8px 16px; } */
-.laptop-selection-area.features div table th     {font-size: large;  text-align: start;}
+.laptop-selection-area.features div table th     {font-size: large; background:#eee; text-align: start;}
 
 /************************************END OF LAPTOP SELECTION AREA**************************************/
 /******************************************************************************************************/

@@ -2,7 +2,7 @@
 
 
 ## Name
-RPG game characters and items.
+Computer Store
 
 ## Description
 1.	This project is a small web app to simulate a web store.
